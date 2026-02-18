@@ -5,7 +5,8 @@ public partial class TextPage : ContentPage
 	Label lbl;
 	Editor editor;
 	HorizontalStackLayout hsl;
-	List<string> buttons = new List<string> { "Tagasi", "Avaleht", "Edasi" };
+	List<string> nupud = new List<string> { "Tagasi", "Avaleht", "Edasi" };
+	VerticalStackLayout vsl;
 	public TextPage()
 	{
 		//InitializeComponent();
@@ -29,47 +30,51 @@ public partial class TextPage : ContentPage
 			FontSize = 28,
 			FontAttributes = FontAttributes.Italic
 		};
-		editor.TextChanged += Teksti_sisestamine;
-		hsl = new HorizontalStackLayout { };
-		for (int i = 0; i < 3; i++)
+		editor.TextChanged += (sender, e) =>
 		{
-			Button b = new Button
-			{
-				Text = Button[i],
-				ZIndex = i,
-				WidthRequest = DeviceDisplay.Current.MainDisplayInfo.Width / 8.3
-			};
-			hsl.Add(b);
-			b.Clicked += Liikumine;
-		}
-		VerticalStackLayout vst = new VerticalStackLayout
-		{
-			Children = { lbl, editor, hsl },
-			VerticalOptions = LayoutOptions.End
+			lbl.Text = editor.Text;
 		};
-		Content = vst;
+		hsl = new HorizontalStackLayout { Spacing = 20, HorizontalOptions = LayoutOptions.Center };
+		for (int j = 0; j < nupud.Count; j++)
+		{
+			Button nupp = new Button
+			{
+				Text = nupud[j],
+				FontSize = 28,
+				FontFamily = "MMudah",
+				TextColor = Colors.BlueViolet,
+				BackgroundColor = Colors.LightGray,
+				CornerRadius = 10,
+				HeightRequest = 50,
+				ZIndex = j
+			};
+			hsl.Add(nupp);
+            nupp.Clicked += Liikumine;
+		}
+		vsl = new VerticalStackLayout
+		{
+			Padding = 20,
+			Spacing = 15,
+			Children = { lbl, editor, hsl },
+			HorizontalOptions = LayoutOptions.Center
+		};
+		Content = vsl;
 	}
 
-
-private void Teksti_sisestamine(object? sender, TextChangedEventArgs e)
-	{
-		lbl.Text = editor.Text;
-	}
-
-	private async void Liikumine(object? sender, EventArgs e)
-	{
-		Button btn = (Button)sender;
-		if (btn.ZIndex == 0)
+    private void Liikumine(object? sender, EventArgs e)
+    {
+		Button nupp = sender as Button;
+		if(nupp.ZIndex == 0)
 		{
-			await Navigation.PushAsync(new TextPage(btn.ZIndex));
+			Navigation.PopAsync();
 		}
-		else if (btn.ZIndex == 1)
+		else if (nupp.ZIndex == 1)
 		{
-			await Navigation.PushAsync(new StartPage());
+			Navigation.PopToRootAsync();
 		}
-		else
+		else if (nupp.ZIndex == 2)
 		{
-			await Navigation.PushAsync(new FigurePage(btn.ZIndex));
+			Navigation.PushAsync(new FigurePage());
 		}
-	}
+    }
 }
