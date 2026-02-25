@@ -12,12 +12,40 @@ public partial class RGBcolorPage : ContentPage
     Slider blueSlider;
     Slider greenSlider;
     BoxView boxView;
-	public RGBcolorPage()
-	{
-        BoxView boxView = new BoxView
-        {
+    public RGBcolorPage()
+    {
+        redLabel = new Label { Text = "Red = 00" };
+        greenLabel = new Label { Text = "Green = 00" };
+        blueLabel = new Label { Text = "Blue = 00" };
 
+        redSlider = new Slider
+        {
+            Minimum = 0,
+            Maximum = 255
         };
+        redSlider.ValueChanged += OnSliderValueChanged;
+
+        greenSlider = new Slider
+        {
+            Minimum = 0,
+            Maximum = 255
+        };
+        greenSlider.ValueChanged += OnSliderValueChanged;
+
+        blueSlider = new Slider
+        {
+            Minimum = 0,
+            Maximum = 255
+        };
+        blueSlider.ValueChanged += OnSliderValueChanged;
+
+        boxView = new BoxView
+        {
+            HeightRequest = 150,
+            WidthRequest = 150,
+            HorizontalOptions = LayoutOptions.Center
+        };
+
         stepper = new Stepper
         {
             Minimum = 0,
@@ -25,6 +53,22 @@ public partial class RGBcolorPage : ContentPage
             Increment = 5,
             Value = 50,
             HorizontalOptions = LayoutOptions.Center
+        };
+
+        Content = new StackLayout
+        {
+            Padding = 20,
+            Children =
+        {
+            redLabel,
+            redSlider,
+            greenLabel,
+            greenSlider,
+            blueLabel,
+            blueSlider,
+            boxView,
+            stepper
+        }
         };
     }
 
