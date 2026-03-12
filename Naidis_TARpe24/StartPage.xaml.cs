@@ -32,7 +32,48 @@ public partial class StartPage : ContentPage
 				Navigation.PushAsync(valik);
 			};
 		}
+		Button nulliNupp = new Button
+		{
+			Text = "Nulli seaded (Testsimiseks)",
+			BackgroundColor = Colors.Red,
+			TextColor = Colors.White,
+			CornerRadius = 10,
+			HeightRequest = 50,
+			Margin = new Thickness(0, 30, 0, 0)
+		};
+
+		nulliNupp.Clicked += async (sender, e) =>
+		{
+			Preferences.Default.Remove("EsimeneKäivitamine");
+			await DisplayAlertAsync("Edukalt nullitud", "Mälu on tühjendatud. Kui sa lehe uuesti avad, käivitub äpp nagu täiesti uus!", "OK");
+		};
+		vst.Add(nulliNupp);
 		sv = new ScrollView { Content = vst };
 		Content = sv;
+	}
+
+	protected override async void OnAppearing()
+	{
+		base.OnAppearing();
+
+		bool onEsimeneStart = Preferences.Default.Get("EsimeneKäivitamine", true);
+
+		if (onEsimeneStart)
+		{
+			bool vastus = await DisplayAlertAsync("Tere tulemast!",
+				"Tundub, et avasid selle rakenduse esimest korda. Kas sa soovid näha" +
+				"lühikest juhendit?",
+				"Jah, palun",
+				"Ei, saan ise hakkama");
+
+			if (vastus)
+			{
+				await DisplayAlertAsync("Juhend",
+					"Siin on sinu lühike juhend: vali menüüst sobiv teema ja uuri, kuidas elemendid töötavad!",
+					"Selge");
+			}
+
+			Preferences.Default.Set("EsimeneKäivitamine", false);
+		}
 	}
 }
