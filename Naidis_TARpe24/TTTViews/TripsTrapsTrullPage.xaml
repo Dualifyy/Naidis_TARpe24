@@ -21,8 +21,8 @@
             Grid.Row="0" Grid.Column="0" BackgroundColor="White" Clicked="OnNewGameClicked"/>
 
             <!-- 2 -->
-            <Button Text="Kes on esimene?"
-            Grid.Row="0" Grid.Column="1" BackgroundColor="White" Clicked="OnRandomStartClicked"/>
+            <Button Text="Vaheta sümbolit"
+            Grid.Row="0" Grid.Column="1" BackgroundColor="White" Clicked="OnSwitchSymbol"/>
 
             <!-- 3 -->
             <Button Text="Mäng Kahekesi"

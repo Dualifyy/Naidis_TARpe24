@@ -2,6 +2,7 @@ namespace Naidis_TARpe24.TTTViews;
 
 public partial class TripsTrapsTrullPage : ContentPage
 {
+    GameService game = new GameService();
     bool vsAI = false;
     string playerSymbol = "X";
     string aiSymbol = "O";
@@ -10,7 +11,7 @@ public partial class TripsTrapsTrullPage : ContentPage
 	{
 		InitializeComponent();
 	}
-    GameService game = new GameService();
+    
 
     protected override void OnAppearing()
     {
@@ -24,6 +25,7 @@ public partial class TripsTrapsTrullPage : ContentPage
         GameGrid.RowDefinitions.Clear();
         GameGrid.ColumnDefinitions.Clear();
         GameGrid.Children.Clear();
+        
 
         for (int i = 0; i < 3; i++)
         {
@@ -80,21 +82,31 @@ public partial class TripsTrapsTrullPage : ContentPage
 
                         if (aiRow != -1)
                         {
-                            game.MakeMove(aiRow, aiCol);
+                            game.Board[aiRow, aiCol] = aiSymbol;
+                            game.CurrentPlayer = playerSymbol;
 
                             buttons[aiRow, aiCol].Text = aiSymbol;
 
                             winner = game.CheckWinner();
 
-                            if (winner != null)
+                            if (winner == "X")
                             {
-                                await DisplayAlert("Võit!", $"{winner} võitis!", "OK");
+                                int xWins = Preferences.Get("xWins", 0);
+                                Preferences.Set("xWins", xWins + 1);
                                 game.ResetGame();
                                 CreateGrid();
                             }
-                            else if (game.IsDraw())
+                            else if (winner == "O")
                             {
-                                await DisplayAlert("Viik", "Keegi ei võitnud!", "OK");
+                                int oWins = Preferences.Get("oWins", 0);
+                                Preferences.Set("oWins", oWins + 1);
+                                game.ResetGame();
+                                CreateGrid();
+                            }
+                            if (game.IsDraw())
+                            {
+                                int draws = Preferences.Get("draws", 0);
+                                Preferences.Set("draws", draws + 1);
                                 game.ResetGame();
                                 CreateGrid();
                             }
@@ -112,19 +124,36 @@ public partial class TripsTrapsTrullPage : ContentPage
         CreateGrid();
     }
 
-    void OnRandomStartClicked(object sender, EventArgs e)
+    void OnSwitchSymbol(object sender, EventArgs e)
     {
-        Random rnd = new Random();
-        game.CurrentPlayer = rnd.Next(2) == 0 ? "X" : "O";
+        if (playerSymbol == "X")
+        {
+            playerSymbol = "O";
+            aiSymbol = "X";
+        }
+        else
+        {
+            playerSymbol = "X";
+            aiSymbol = "O";
+        }
+
+        game.ResetGame();
+        CreateGrid();
+
+        DisplayAlert("Sümbol", $"Mängija: {playerSymbol}", "OK");
     }
     void OnPlayWithAIClicked(object sender, EventArgs e)
     {
         vsAI = true;
+        game.ResetGame();
+        CreateGrid();
         DisplayAlert("Režiim", "Mängid boti vastu!", "OK");
     }
     void OnTwoPlayerClicked(object sender, EventArgs e)
     {
         vsAI = false;
+        game.ResetGame();
+        CreateGrid();
         DisplayAlert("Režiim", "2 mängijat", "OK");
     }
 }

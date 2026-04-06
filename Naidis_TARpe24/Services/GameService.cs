@@ -1,12 +1,13 @@
-﻿public class GameService
+﻿using Naidis_TARpe24.TTTViews;
+public class GameService
 {
     public string[,] Board { get; private set; } = new string[3, 3];
-    public string CurrentPlayer { get; set; } = "X";
+    public string CurrentPlayer { get; set; }
 
     public void ResetGame()
     {
         Board = new string[3, 3];
-        CurrentPlayer = "X";
+        CurrentPlayer = (CurrentPlayer == "X") ? "X" : "O";
     }
 
     public bool MakeMove(int row, int col)
@@ -15,7 +16,7 @@
             return false;
 
         Board[row, col] = CurrentPlayer;
-        CurrentPlayer = (CurrentPlayer == "X") ? "O" : "X";
+        CurrentPlayer = (CurrentPlayer == "X") ? "X" : "O";
         return true;
     }
 
