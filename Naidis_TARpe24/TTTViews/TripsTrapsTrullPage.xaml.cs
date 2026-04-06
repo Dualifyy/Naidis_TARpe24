@@ -3,13 +3,12 @@ namespace Naidis_TARpe24.TTTViews;
 public partial class TripsTrapsTrullPage : ContentPage
 {
     GameService game = new GameService();
-    bool vsAI = false;
-    string playerSymbol = "X";
-    string aiSymbol = "O";
+    string aiSymbol;
     Button[,] buttons;
     public TripsTrapsTrullPage()
 	{
 		InitializeComponent();
+        aiSymbol = (game.CurrentPlayer == "X") ? "O" : "X";
 	}
     
 
@@ -54,7 +53,8 @@ public partial class TripsTrapsTrullPage : ContentPage
                 {
                     if (!game.MakeMove(r, c))
                         return;
-
+                    Console.WriteLine($"(MSG FROM TripsTrapsTrullPage.xaml.cs btn.clicked) Current player is: {game.CurrentPlayer}");
+                    Console.WriteLine($"(MSG FROM TripsTrapsTrullPage.xaml.cs btn.clicked) AI SYMBOL is: {aiSymbol}");
                     btn.Text = game.Board[r, c];
 
                     var winner = game.CheckWinner();
@@ -76,14 +76,16 @@ public partial class TripsTrapsTrullPage : ContentPage
                     }
 
                     // mängid boti vastu kui valitud
-                    if (vsAI)
+                    if (game.vsAI)
                     {
                         var (aiRow, aiCol) = game.GetAIMove();
 
                         if (aiRow != -1)
                         {
+                            Console.WriteLine($"(MSG FROM TripsTrapsTrullPage.xaml.cs if (vsAI)) Current player is: {game.CurrentPlayer}");
+                            Console.WriteLine($"(MSG FROM TripsTrapsTrullPage.xaml.cs if (vsAI)) AI SYMBOL is: {aiSymbol}");
                             game.Board[aiRow, aiCol] = aiSymbol;
-                            game.CurrentPlayer = playerSymbol;
+                            
 
                             buttons[aiRow, aiCol].Text = aiSymbol;
 
@@ -126,32 +128,36 @@ public partial class TripsTrapsTrullPage : ContentPage
 
     void OnSwitchSymbol(object sender, EventArgs e)
     {
-        if (playerSymbol == "X")
+        if (game.CurrentPlayer == "X")
         {
-            playerSymbol = "O";
+            game.CurrentPlayer = "O";
             aiSymbol = "X";
+            Console.WriteLine($"(MSG FROM TripsTrapsTrullPage.xaml.cs OnSwitchSymbol) Current player is: {game.CurrentPlayer}");
+            Console.WriteLine($"(MSG FROM TripsTrapsTrullPage.xaml.cs OnSwitchSymbol) AI SYMBOL is: {aiSymbol}");
         }
         else
         {
-            playerSymbol = "X";
+            game.CurrentPlayer = "X";
             aiSymbol = "O";
+            Console.WriteLine($"(MSG FROM TripsTrapsTrullPage.xaml.cs OnSwitchSymbol) Current player is: {game.CurrentPlayer}");
+            Console.WriteLine($"(MSG FROM TripsTrapsTrullPage.xaml.cs OnSwitchSymbol) AI SYMBOL is: {aiSymbol}");
         }
 
         game.ResetGame();
         CreateGrid();
 
-        DisplayAlert("Sümbol", $"Mängija: {playerSymbol}", "OK");
+        DisplayAlert("Sümbol", $"Mängija: {game.CurrentPlayer}", "OK");
     }
     void OnPlayWithAIClicked(object sender, EventArgs e)
     {
-        vsAI = true;
+        game.vsAI = true;
         game.ResetGame();
         CreateGrid();
         DisplayAlert("Režiim", "Mängid boti vastu!", "OK");
     }
     void OnTwoPlayerClicked(object sender, EventArgs e)
     {
-        vsAI = false;
+        game.vsAI = false;
         game.ResetGame();
         CreateGrid();
         DisplayAlert("Režiim", "2 mängijat", "OK");

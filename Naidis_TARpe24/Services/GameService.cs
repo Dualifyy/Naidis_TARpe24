@@ -2,7 +2,8 @@
 public class GameService
 {
     public string[,] Board { get; private set; } = new string[3, 3];
-    public string CurrentPlayer { get; set; }
+    public string CurrentPlayer { get; set; } = "X";
+    public bool vsAI { get; set; } = false;
 
     public void ResetGame()
     {
@@ -15,8 +16,19 @@ public class GameService
         if (Board[row, col] != null)
             return false;
 
+        
         Board[row, col] = CurrentPlayer;
-        CurrentPlayer = (CurrentPlayer == "X") ? "X" : "O";
+        if (vsAI)
+        {
+            CurrentPlayer = (CurrentPlayer == "X") ? "X" : "O";
+        }
+        else
+        {
+            CurrentPlayer = (CurrentPlayer == "X") ? "O" : "X";
+        }
+        
+        
+        Console.WriteLine($"(MSG FROM GameService.cs) Current player is: {CurrentPlayer}");
         return true;
     }
 
