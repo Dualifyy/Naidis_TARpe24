@@ -1,11 +1,12 @@
+using Naidis_TARpe24.TTTViews;
 namespace Naidis_TARpe24;
 
 public partial class StartPage : ContentPage
 {
 	VerticalStackLayout vst;
 	ScrollView sv;
-	public List<ContentPage> Lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new DateTime_Page(), new StepperSliderPage(), new RGBcolorPage(), new LumememmPage(), new Pop_up_page(), new MoistatusPage()};
-	public List<string> LeheNimed = new List<string> { "Tekst", "Kujund", "Kellaaeg", "Slaiderid", "RGB", "Lumememm", "Pop up page", "Moistatused" };
+	public List<ContentPage> Lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new DateTime_Page(), new StepperSliderPage(), new RGBcolorPage(), new LumememmPage(), new Pop_up_page(), new MoistatusPage(), new PickerImageGridPage(), new TripsTrapsTrullPage(), new TripsTrapsTrullInfoPage()};
+	public List<string> LeheNimed = new List<string> { "Tekst", "Kujund", "Kellaaeg", "Slaiderid", "RGB", "Lumememm", "Pop up page", "Moistatused", "Grid leht", "Trips Traps Trull", "TTT INFO LEHT" };
 
 	public StartPage()
 	{

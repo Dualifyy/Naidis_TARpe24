@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Naidis_TARpe24.TTTViews.TripsTrapsTrullPage"
+             Title="TripsTrapsTrullPage">
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Grid ColumnSpacing="10" RowSpacing="10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 1 -->
+            <Button Text="Alusta mäng"
+            Grid.Row="0" Grid.Column="0" BackgroundColor="White" Clicked="OnNewGameClicked"/>
+
+            <!-- 2 -->
+            <Button Text="Kes on esimene?"
+            Grid.Row="0" Grid.Column="1" BackgroundColor="White" Clicked="OnRandomStartClicked"/>
+
+            <!-- 3 -->
+            <Button Text="Mäng Kahekesi"
+            Grid.Row="1" Grid.Column="0" BackgroundColor="White" Clicked="OnTwoPlayerClicked"/>
+
+            <!-- 4 -->
+            <Button Text="Mäng botiga"
+            Grid.Row="1" Grid.Column="1" BackgroundColor="White" Clicked="OnPlayWithAIClicked"/>
+
+        </Grid>
+
+        <Frame BorderColor="Black" CornerRadius="15" Padding="10">
+            <Grid x:Name="GameGrid" WidthRequest="300"
+      HeightRequest="300"/>
+        </Frame>
+
+    </VerticalStackLayout>
+</ContentPage>
