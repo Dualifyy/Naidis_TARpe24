@@ -69,6 +69,9 @@
 	  <MauiXaml Update="DateTime_Page.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ElemendidPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="FigurePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
