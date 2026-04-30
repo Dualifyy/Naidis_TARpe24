@@ -41,7 +41,7 @@ public partial class ElemendidPage : ContentPage
             Label hind = new Label();
             hind.SetBinding(Label.TextProperty, "Hind");
 
-            return new ViewCell
+            return new ViewCell  
             {
                 View = new StackLayout
                 {

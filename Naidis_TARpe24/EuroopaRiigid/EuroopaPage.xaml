@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Naidis_TARpe24.EuroopaRiigid.EuroopaPage"
+             Title="EuroopaPage">
+    <VerticalStackLayout Padding="10">
+        <Entry x:Name="nimiEntry" Placeholder="Riigi nimi"/>
+        <Entry x:Name="pealinnEntry" Placeholder="Pealinn"/>
+        <Entry x:Name="rahvaarvEntry" Placeholder="Rahvaarv" Keyboard="Numeric"/>
+        <Entry x:Name="lippEntry" Placeholder="Lipu failinimi (nt estonia.png)"/>
+        <Button Text="Lisa" Clicked="LisaNupp_Clicked"/>
+        <Button Text="Salvesta muudatused" Clicked="SalvestaNupp_Clicked"/>
+        <Button Text="Kustuta valitud" Clicked="KustutaNupp_Clicked"/>
+        <ListView x:Name="riigidListView" ItemTapped="RiikTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid ColumnDefinitions="80, *">
+                            <Image Source="{Binding Lipp}" HeightRequest="50"/>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="{Binding Nimi}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Pealinn}" FontSize="12"/>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>
