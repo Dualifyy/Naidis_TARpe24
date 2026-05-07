@@ -28,7 +28,7 @@ public partial class EuroopaPage : ContentPage
 
         if (valitudRiik == null) return;
 
-        await DisplayAlert("Info",
+        await DisplayAlertAsync("Info",
             $"Riik: {valitudRiik.Nimi}\nPealinn: {valitudRiik.Pealinn}\nRahvaarv: {valitudRiik.Rahvaarv} inimest",
             "OK");
 
@@ -49,7 +49,7 @@ public partial class EuroopaPage : ContentPage
 
         if (olemas)
         {
-            await DisplayAlert("Viga", "See riik on juba olemas!", "OK");
+            await DisplayAlertAsync("Viga", "See riik on juba olemas!", "OK");
             return;
         }
 
