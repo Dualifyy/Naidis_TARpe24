@@ -96,6 +96,9 @@
 	  <MauiXaml Update="Pop_up_page.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PrograPortfoolio.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="RGBcolorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
