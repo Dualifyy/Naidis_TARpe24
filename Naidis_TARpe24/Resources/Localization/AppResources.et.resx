@@ -98,4 +98,11 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="EnglishButton" xml:space="preserve"><value>Inglise</value></data>
+	<data name="EstonianButton" xml:space="preserve"><value>Eesti</value></data>
+	<data name="RustDesc" xml:space="preserve"><value>Rust tagab kõrge jõudluse ja turvalise mäluhalduse ilma automaatse prügikoristajata.</value></data>
+	<data name="AssemblyDesc" xml:space="preserve"><value>Assambleerimiskeel tagab otsese ja madala taseme kontrolli arvuti konkreetse riistvaraarhitektuuri üle.</value></data>
+	<data name="C++Desc" xml:space="preserve"><value>C++ ühendab kiire süsteemiprogrammeerimise ja võimsad objektorienteeritud funktsioonid keerukate rakenduste loomiseks.</value></data>
+	<data name="CDesc" xml:space="preserve"><value> C on ülimalt efektiivne keel, mida kasutatakse kaasaegsete operatsioonisüsteemide ja seadmedraiverite loomisel.</value></data>
+	<data name="HolyCDesc" xml:space="preserve"><value>HolyC on omapärane C-keele variant, mis loodi spetsiaalselt TempleOS operatsioonisüsteemi programmeerimiseks.</value></data>
 </root>

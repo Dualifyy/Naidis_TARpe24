@@ -1,3 +1,6 @@
+using Naidis_TARpe24.Resources.Localization;
+using Naidis_TARpe24.Services;
+
 namespace Naidis_TARpe24;
 
 public class CarouselProgra
@@ -5,25 +8,29 @@ public class CarouselProgra
 	public string Title { get; set; }
 	public string ImageUrl { get; set; }
 	public string TextBoxHelloWorld { get; set; }
+	public string Description { get; set; }
 }
 public partial class PrograPortfoolio : ContentPage
 {
 	private CarouselView carouselProgra;
-	private List<CarouselItem> items;
+	private List<CarouselProgra> items;
+	private Label descriptionLabel;
 	private int position = 0;
+
 	public PrograPortfoolio()
 	{
 		Title = "Karuselli näide";
+		LanguageService.LanguageChanged += OnLanguageChanged;
 
-		var items = new List<CarouselProgra>
+		this.items = new List<CarouselProgra>
 		{
-			new CarouselProgra { Title = "Rust", ImageUrl = "https://rust-on-nails.com/blog/rust-complicated/rust.jpg", TextBoxHelloWorld = "\"\"\r\nfn main() {\r\n println!(\"Hello, World!\");\r\n}\r\n\"\""},
-			new CarouselProgra { Title = "Assembly", ImageUrl = "https://media.licdn.com/dms/image/v2/D4D12AQEM9F_-u1OT5Q/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1658763190886?e=2147483647&v=beta&t=aEp72fzTRZC_0EilFbT0wVV2jw6O-Bqt759qLG4pLrw", TextBoxHelloWorld = "\"\"\r\n section .data\r\n msg db \"Hello, World!\", 10\r\n msg_len equ $ - msg\r\n\r\n section .text\r\n global _start\r\n\r\n _start:\r\n mov rax, 1\r\n mov rdi, 1\r\n mov rsi, msg\r\n mov rdx, msg_len\r\n syscall\r\n\r\n mov rax, 60\r\n mov rdi, 0\r\n syscall\r\n  \"\""},
-            new CarouselProgra { Title = "C++", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1280px-ISO_C%2B%2B_Logo.svg.png", TextBoxHelloWorld = "\"\"\r\n#include <iostream>\r\n\r\n int main() {\r\n std::cout << \"Hello, World!\" << std::endl;\r\n return 0;\r\n }\r\n \"\""},
-            new CarouselProgra { Title = "C", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/C_Programming_Language.svg/960px-C_Programming_Language.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail", TextBoxHelloWorld = "\"\"\r\n #include <stdio.h>\r\n\r\n int main() {\r\n printf(\"Hello, World!\\n\");\r\n return 0;\r\n }\r\n \"\""},
-            new CarouselProgra { Title = "HolyC", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HolyC_Logo.svg/1920px-HolyC_Logo.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail", TextBoxHelloWorld = "\"\"\r\n U0 HelloWorld()\r\n {\r\n \"Hello, World!\\n\";\r\n }\r\n HelloWorld;\r\n \"\""},
-        };
-		var carouselProgra = new CarouselView
+			new CarouselProgra { Title = "Rust", ImageUrl = "https://rust-on-nails.com/blog/rust-complicated/rust.jpg", TextBoxHelloWorld = "\"\"\r\nfn main() {\r\n println!(\"Hello, World!\");\r\n}\r\n\"\"", Description = AppResources.RustDesc },
+			new CarouselProgra { Title = "Assembly", ImageUrl = "https://media.licdn.com/dms/image/v2/D4D12AQEM9F_-u1OT5Q/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1658763190886?e=2147483647&v=beta&t=aEp72fzTRZC_0EilFbT0wVV2jw6O-Bqt759qLG4pLrw", TextBoxHelloWorld = "\"\"\r\n section .data\r\n msg db \"Hello, World!\", 10\r\n msg_len equ $ - msg\r\n\r\n section .text\r\n global _start\r\n\r\n _start:\r\n mov rax, 1\r\n mov rdi, 1\r\n mov rsi, msg\r\n mov rdx, msg_len\r\n syscall\r\n\r\n mov rax, 60\r\n mov rdi, 0\r\n syscall\r\n  \"\"", Description = AppResources.AssemblyDesc },
+			new CarouselProgra { Title = "C++", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1280px-ISO_C%2B%2B_Logo.svg.png", TextBoxHelloWorld = "\"\"\r\n#include <iostream>\r\n\r\n int main() {\r\n std::cout << \"Hello, World!\" << std::endl;\r\n return 0;\r\n }\r\n \"\"", Description = AppResources.ResourceManager.GetString("C++Desc") ?? "C++" },
+			new CarouselProgra { Title = "C", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/C_Programming_Language.svg/960px-C_Programming_Language.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail", TextBoxHelloWorld = "\"\"\r\n #include <stdio.h>\r\n\r\n int main() {\r\n printf(\"Hello, World!\\n\");\r\n return 0;\r\n }\r\n \"\"", Description = AppResources.CDesc },
+			new CarouselProgra { Title = "HolyC", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HolyC_Logo.svg/1920px-HolyC_Logo.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail", TextBoxHelloWorld = "\"\"\r\n U0 HelloWorld()\r\n {\r\n \"Hello, World!\\n\";\r\n }\r\n HelloWorld;\r\n \"\"", Description = AppResources.HolyCDesc },
+		};
+		this.carouselProgra = new CarouselView
 		{
 			ItemsSource = items,
 			HeightRequest = 300,
@@ -78,7 +85,7 @@ public partial class PrograPortfoolio : ContentPage
 			tap.Tapped += async (s, e) =>
 			{
 				var tappedItem = ((Frame)s).BindingContext as CarouselProgra;
-				await DisplayAlertAsync("Kuidas kirjutada tere maailm?", tappedItem?.TextBoxHelloWorld ?? "Pole olemas", "OK");
+				await DisplayAlert("Kuidas kirjutada tere maailm?", tappedItem?.TextBoxHelloWorld ?? "Pole olemas", "OK");
 			};
 			frame.GestureRecognizers.Add(tap);
 
@@ -99,6 +106,39 @@ public partial class PrograPortfoolio : ContentPage
 		};
 		carouselProgra.IndicatorView = indicatorView;
 
+		descriptionLabel = new Label
+		{
+			Text = items[0].Description,
+			FontSize = 14,
+			Margin = new Thickness(10),
+			LineBreakMode = LineBreakMode.WordWrap,
+			TextColor = Colors.White
+		};
+
+		var languageButtonsStackLayout = new HorizontalStackLayout
+		{
+			Margin = new Thickness(10),
+			Spacing = 10,
+			HorizontalOptions = LayoutOptions.Center
+		};
+
+		var englishButton = new Button
+		{
+			Text = AppResources.EnglishButton,
+			WidthRequest = 100,
+			Command = new Command(() => LanguageService.ChangeLanguage("en"))
+		};
+
+		var estonianButton = new Button
+		{
+			Text = AppResources.EstonianButton,
+			WidthRequest = 100,
+			Command = new Command(() => LanguageService.ChangeLanguage("et"))
+		};
+
+		languageButtonsStackLayout.Children.Add(englishButton);
+		languageButtonsStackLayout.Children.Add(estonianButton);
+
 		Device.StartTimer(TimeSpan.FromSeconds(4), () =>
 		{
 			if (items.Count == 0)
@@ -106,17 +146,41 @@ public partial class PrograPortfoolio : ContentPage
 
 			position = (position + 1) % items.Count;
 			carouselProgra.Position = position;
+			descriptionLabel.Text = items[position].Description;
 
-			return true; //timer laheb edasi
+			return true;
 		});
 		Content = new StackLayout
 		{
 			Padding = 20,
+			Spacing = 10,
 			Children =
 			{
 				carouselProgra,
-				indicatorView
+				indicatorView,
+				descriptionLabel,
+				languageButtonsStackLayout
 			}
 		};
+	}
+
+	private void OnLanguageChanged()
+	{
+		if (items.Count > 0)
+		{
+			items[0].Description = AppResources.RustDesc;
+			items[1].Description = AppResources.AssemblyDesc;
+			items[2].Description = AppResources.ResourceManager.GetString("C++Desc") ?? "C++";
+			items[3].Description = AppResources.CDesc;
+			items[4].Description = AppResources.HolyCDesc;
+
+			descriptionLabel.Text = items[position].Description;
+		}
+	}
+
+	protected override void OnDisappearing()
+	{
+		base.OnDisappearing();
+		LanguageService.LanguageChanged -= OnLanguageChanged;
 	}
 }

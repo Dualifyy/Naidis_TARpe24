@@ -59,5 +59,68 @@ namespace Naidis_TARpe24.Resources.Localization {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assembly provides direct, low-level control over a computer&apos;s specific hardware architecture..
+        /// </summary>
+        internal static string AssemblyDesc {
+            get {
+                return ResourceManager.GetString("AssemblyDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C++ combines fast systems programming with powerful object-oriented features for complex applications..
+        /// </summary>
+        internal static string C__Desc {
+            get {
+                return ResourceManager.GetString("C++Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  C is a highly efficient language used to build modern operating systems and hardware drivers..
+        /// </summary>
+        internal static string CDesc {
+            get {
+                return ResourceManager.GetString("CDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        internal static string EnglishButton {
+            get {
+                return ResourceManager.GetString("EnglishButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estonian.
+        /// </summary>
+        internal static string EstonianButton {
+            get {
+                return ResourceManager.GetString("EstonianButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  HolyC is a unique C-variant created specifically to program the TempleOS operating system..
+        /// </summary>
+        internal static string HolyCDesc {
+            get {
+                return ResourceManager.GetString("HolyCDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Rust delivers high performance and guaranteed memory safety without using a garbage collector..
+        /// </summary>
+        internal static string RustDesc {
+            get {
+                return ResourceManager.GetString("RustDesc", resourceCulture);
+            }
+        }
     }
 }

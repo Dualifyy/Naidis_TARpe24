@@ -98,4 +98,11 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="EnglishButton" xml:space="preserve"><value>English</value></data>
+	<data name="EstonianButton" xml:space="preserve"><value>Estonian</value></data>
+	<data name="RustDesc" xml:space="preserve"><value> Rust delivers high performance and guaranteed memory safety without using a garbage collector.</value></data>
+	<data name="AssemblyDesc" xml:space="preserve"><value>Assembly provides direct, low-level control over a computer's specific hardware architecture.</value></data>
+	<data name="C++Desc" xml:space="preserve"><value>C++ combines fast systems programming with powerful object-oriented features for complex applications.</value></data>
+	<data name="CDesc" xml:space="preserve"><value> C is a highly efficient language used to build modern operating systems and hardware drivers.</value></data>
+	<data name="HolyCDesc" xml:space="preserve"><value> HolyC is a unique C-variant created specifically to program the TempleOS operating system.</value></data>
 </root>
