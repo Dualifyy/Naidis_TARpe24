@@ -98,6 +98,17 @@ public partial class PrograPortfoolio : ContentPage
 			Margin = new Thickness(0, 10)
 		};
 		carouselProgra.IndicatorView = indicatorView;
+
+		Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+		{
+			if (items.Count == 0)
+				return false;
+
+			position = (position + 1) % items.Count;
+			carouselProgra.Position = position;
+
+			return true; //timer laheb edasi
+		});
 		Content = new StackLayout
 		{
 			Padding = 20,
