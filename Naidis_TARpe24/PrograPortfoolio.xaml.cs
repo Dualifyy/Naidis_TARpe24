@@ -99,7 +99,7 @@ public partial class PrograPortfoolio : ContentPage
 		};
 		carouselProgra.IndicatorView = indicatorView;
 
-		Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+		Device.StartTimer(TimeSpan.FromSeconds(4), () =>
 		{
 			if (items.Count == 0)
 				return false;
